@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
-import { ProductCard } from '@/components/product/ProductCard';
-import { products, categories } from '@/data/products';
+import { ShopifyProductCard } from '@/components/product/ShopifyProductCard';
+import { useProducts } from '@/hooks/useShopify';
+import { Loader2 } from 'lucide-react';
+
+const categories = ['ALL', 'OUTERWEAR', 'TOPS', 'BOTTOMS', 'ACCESSORIES'];
 
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get('category')?.toUpperCase() || 'ALL';
   const [activeCategory, setActiveCategory] = useState(categoryParam);
 
-  const filteredProducts = activeCategory === 'ALL'
-    ? products
-    : products.filter(p => p.category === activeCategory);
+  const { data: products, isLoading, error } = useProducts(50, activeCategory !== 'ALL' ? activeCategory : undefined);
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
@@ -30,7 +31,7 @@ export default function Shop() {
         <div className="px-6 md:px-12 py-12 md:py-16">
           <h1 className="text-section mb-4">SHOP ALL</h1>
           <p className="font-mono text-muted-foreground">
-            {filteredProducts.length} PRODUCTS
+            {isLoading ? 'LOADING...' : `${products?.length || 0} PRODUCTS`}
           </p>
         </div>
       </section>
@@ -58,26 +59,39 @@ export default function Shop() {
 
       {/* Product Grid */}
       <section>
-        <div className="grid grid-cols-2 lg:grid-cols-4">
-          {filteredProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className={`
-                border-b border-border
-                ${index % 4 !== 3 ? 'lg:border-r' : ''} 
-                ${index % 2 !== 1 ? 'border-r lg:border-r' : 'lg:border-r-0'}
-              `}
-            >
-              <ProductCard product={product} />
-            </div>
-          ))}
-        </div>
-
-        {filteredProducts.length === 0 && (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-24">
+            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+          </div>
+        ) : error ? (
           <div className="px-6 md:px-12 py-24 text-center">
             <p className="font-mono text-muted-foreground">
-              NO PRODUCTS FOUND IN THIS CATEGORY
+              FAILED TO LOAD PRODUCTS
             </p>
+          </div>
+        ) : !products || products.length === 0 ? (
+          <div className="px-6 md:px-12 py-24 text-center">
+            <p className="font-mono text-muted-foreground mb-4">
+              NO PRODUCTS FOUND
+            </p>
+            <p className="font-mono text-sm text-muted-foreground">
+              Products will appear here once added to the store.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            {products.map((product, index) => (
+              <div
+                key={product.node.id}
+                className={`
+                  border-b border-border
+                  ${index % 4 !== 3 ? 'lg:border-r' : ''} 
+                  ${index % 2 !== 1 ? 'border-r lg:border-r' : 'lg:border-r-0'}
+                `}
+              >
+                <ShopifyProductCard product={product} />
+              </div>
+            ))}
           </div>
         )}
       </section>

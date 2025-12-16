@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ShoppingBag, Search, User } from 'lucide-react';
-import { useCart } from '@/context/CartContext';
+import { useCartStore } from '@/stores/cartStore';
 
 const navLinks = [
   { label: 'SHOP', href: '/shop' },
@@ -11,7 +11,7 @@ const navLinks = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { itemCount } = useCart();
+  const itemCount = useCartStore(state => state.itemCount());
 
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-border">
