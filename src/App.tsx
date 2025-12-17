@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
+import Lookbook from "./pages/Lookbook";
 import ShopifyProductDetail from "./pages/ShopifyProductDetail";
 import ShopifyCart from "./pages/ShopifyCart";
 import NotFound from "./pages/NotFound";
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/about" element={<About />} />
+          <Route path="/lookbook" element={<Lookbook />} />
           <Route path="/product/:handle" element={<ShopifyProductDetail />} />
           <Route path="/cart" element={<ShopifyCart />} />
           <Route path="*" element={<NotFound />} />
