@@ -25,24 +25,24 @@ export function Footer() {
     <footer className="border-t border-border bg-background">
       {/* Newsletter Section */}
       <div className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-20">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">
-                JOIN THE STATIC
+              <h3 className="text-section mb-3">
+                Stay Connected
               </h3>
-              <p className="text-muted-foreground text-sm font-mono">
-                Subscribe for early access, exclusive drops, and distorted updates.
+              <p className="text-body max-w-md">
+                Subscribe for early access to new collections, exclusive offers, and brand updates.
               </p>
             </div>
-            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
-                placeholder="EMAIL ADDRESS"
-                className="input-brutal flex-1 text-xs uppercase tracking-wider"
+                placeholder="Email address"
+                className="input-elegant flex-1"
               />
-              <button type="submit" className="btn-brutal-primary whitespace-nowrap">
-                SUBSCRIBE
+              <button type="submit" className="btn-luxury-primary whitespace-nowrap">
+                Subscribe
               </button>
             </form>
           </div>
@@ -50,17 +50,17 @@ export function Footer() {
       </div>
 
       {/* Links Section */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
           {/* Shop */}
           <div>
-            <h4 className="text-label mb-4">SHOP</h4>
-            <ul className="space-y-2">
+            <h4 className="text-label mb-6">Shop</h4>
+            <ul className="space-y-4">
               {footerLinks.shop.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -71,13 +71,13 @@ export function Footer() {
 
           {/* Info */}
           <div>
-            <h4 className="text-label mb-4">INFO</h4>
-            <ul className="space-y-2">
+            <h4 className="text-label mb-6">Information</h4>
+            <ul className="space-y-4">
               {footerLinks.info.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -88,13 +88,13 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="text-label mb-4">LEGAL</h4>
-            <ul className="space-y-2">
+            <h4 className="text-label mb-6">Legal</h4>
+            <ul className="space-y-4">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -105,25 +105,25 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <h4 className="text-label mb-4">CONNECT</h4>
+            <h4 className="text-label mb-6">Connect</h4>
             <div className="flex gap-4">
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 border border-border hover:bg-foreground hover:text-background transition-colors"
+                className="w-10 h-10 flex items-center justify-center border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300"
                 aria-label="Instagram"
               >
-                <Instagram size={18} />
+                <Instagram size={18} strokeWidth={1.5} />
               </a>
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 border border-border hover:bg-foreground hover:text-background transition-colors"
+                className="w-10 h-10 flex items-center justify-center border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300"
                 aria-label="Twitter"
               >
-                <Twitter size={18} />
+                <Twitter size={18} strokeWidth={1.5} />
               </a>
             </div>
           </div>
@@ -132,13 +132,13 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-label text-muted-foreground">
-              © 2024 BLURRY BIDNESS. ALL RIGHTS RESERVED.
+            <p className="text-xs text-muted-foreground">
+              © 2024 Blurry Bidness. All rights reserved.
             </p>
-            <p className="text-label text-muted-foreground">
-              DESIGNED IN LA. MADE WITH INTENTION.
+            <p className="text-xs text-muted-foreground">
+              Designed in Los Angeles
             </p>
           </div>
         </div>

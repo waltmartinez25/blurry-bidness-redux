@@ -28,23 +28,24 @@ export default function Shop() {
     <Layout>
       {/* Page Header */}
       <section className="border-b border-border">
-        <div className="px-6 md:px-12 py-12 md:py-16">
-          <h1 className="text-section mb-4">SHOP ALL</h1>
-          <p className="font-mono text-muted-foreground">
-            {isLoading ? 'LOADING...' : `${products?.length || 0} PRODUCTS`}
+        <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-20">
+          <span className="text-label mb-4 block">Collection</span>
+          <h1 className="text-hero mb-4">Shop All</h1>
+          <p className="text-body">
+            {isLoading ? 'Loading...' : `${products?.length || 0} products`}
           </p>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="border-b border-border">
-        <div className="px-6 md:px-12 py-4 flex gap-4 overflow-x-auto">
+      <section className="border-b border-border sticky top-20 bg-background/95 backdrop-blur-sm z-40">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-4 flex gap-3 overflow-x-auto">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
               className={`
-                text-label whitespace-nowrap px-4 py-2 border transition-colors
+                text-[11px] uppercase tracking-luxury font-medium whitespace-nowrap px-5 py-2.5 border transition-all duration-300
                 ${activeCategory === category
                   ? 'bg-foreground text-background border-foreground'
                   : 'bg-background text-foreground border-border hover:border-foreground'
@@ -60,38 +61,31 @@ export default function Shop() {
       {/* Product Grid */}
       <section>
         {isLoading ? (
-          <div className="flex items-center justify-center py-24">
-            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+          <div className="flex items-center justify-center py-32">
+            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           </div>
         ) : error ? (
-          <div className="px-6 md:px-12 py-24 text-center">
-            <p className="font-mono text-muted-foreground">
-              FAILED TO LOAD PRODUCTS
+          <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-32 text-center">
+            <p className="text-body">
+              Failed to load products
             </p>
           </div>
         ) : !products || products.length === 0 ? (
-          <div className="px-6 md:px-12 py-24 text-center">
-            <p className="font-mono text-muted-foreground mb-4">
-              NO PRODUCTS FOUND
+          <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-32 text-center">
+            <p className="text-lg font-serif mb-3">
+              No products found
             </p>
-            <p className="font-mono text-sm text-muted-foreground">
+            <p className="text-body">
               Products will appear here once added to the store.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-            {products.map((product, index) => (
-              <div
-                key={product.node.id}
-                className={`
-                  border-b border-border
-                  ${index % 4 !== 3 ? 'lg:border-r' : ''} 
-                  ${index % 2 !== 1 ? 'border-r lg:border-r' : 'lg:border-r-0'}
-                `}
-              >
-                <ShopifyProductCard product={product} />
-              </div>
-            ))}
+          <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-12 md:py-16">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-14">
+              {products.map((product) => (
+                <ShopifyProductCard key={product.node.id} product={product} />
+              ))}
+            </div>
           </div>
         )}
       </section>

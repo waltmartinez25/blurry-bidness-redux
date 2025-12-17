@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ShopifyProduct } from '@/lib/shopify/storefront';
 import { formatShopifyProduct } from '@/hooks/useShopify';
-import { ArrowUpRight } from 'lucide-react';
 
 interface ShopifyProductCardProps {
   product: ShopifyProduct;
@@ -14,10 +13,10 @@ export function ShopifyProductCard({ product }: ShopifyProductCardProps) {
   return (
     <Link
       to={`/product/${formatted.handle}`}
-      className="product-card group block border border-border bg-card"
+      className="product-card group block"
     >
       {/* Image Container */}
-      <div className="relative aspect-[3/4] overflow-hidden border-b border-border bg-muted">
+      <div className="relative aspect-product overflow-hidden bg-secondary mb-4">
         {formatted.images.length > 0 ? (
           <img
             src={formatted.images[0]}
@@ -26,44 +25,37 @@ export function ShopifyProductCard({ product }: ShopifyProductCardProps) {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-label text-muted-foreground">NO IMAGE</span>
+            <span className="text-label">No Image</span>
           </div>
         )}
         
-        {/* Quick View Overlay */}
-        <div className="absolute inset-0 bg-foreground/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <span className="text-background text-label flex items-center gap-2">
-            QUICK VIEW <ArrowUpRight size={14} />
-          </span>
-        </div>
-
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
           {hasDiscount && (
-            <span className="bg-foreground text-background text-label px-2 py-1">
-              SALE
+            <span className="bg-foreground text-background text-[10px] uppercase tracking-luxury px-3 py-1.5 font-medium">
+              Sale
             </span>
           )}
           {!formatted.inStock && (
-            <span className="bg-muted text-muted-foreground text-label px-2 py-1">
-              SOLD OUT
+            <span className="bg-background/90 text-foreground text-[10px] uppercase tracking-luxury px-3 py-1.5 font-medium">
+              Sold Out
             </span>
           )}
         </div>
       </div>
 
       {/* Product Info */}
-      <div className="p-4">
-        <p className="text-label text-muted-foreground mb-1">
-          {formatted.category || 'PRODUCT'}
+      <div className="space-y-1.5">
+        <p className="text-[11px] uppercase tracking-luxury text-muted-foreground">
+          {formatted.category || 'Product'}
         </p>
-        <h3 className="font-bold uppercase tracking-wide text-sm mb-2 group-hover:underline line-clamp-2">
+        <h3 className="text-sm font-medium tracking-wide line-clamp-1 group-hover:underline underline-offset-4 transition-all">
           {formatted.title}
         </h3>
-        <div className="flex items-center gap-2 font-mono text-sm">
-          <span>{formatted.currencyCode} {formatted.price.toFixed(2)}</span>
+        <div className="flex items-center gap-3 text-sm">
+          <span className="font-medium">{formatted.currencyCode} {formatted.price.toFixed(2)}</span>
           {hasDiscount && (
-            <span className="text-muted-foreground line-through">
+            <span className="text-muted-foreground line-through text-xs">
               {formatted.currencyCode} {formatted.compareAtPrice?.toFixed(2)}
             </span>
           )}

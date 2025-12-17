@@ -7,15 +7,16 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "1.5rem",
+      padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1440px",
       },
     },
     extend: {
       fontFamily: {
-        sans: ["Helvetica Neue", "Arial", "sans-serif"],
-        mono: ["Space Mono", "Courier New", "monospace"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        serif: ["Playfair Display", "Georgia", "serif"],
+        display: ["Playfair Display", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -66,9 +67,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        brutal: "var(--shadow-brutal)",
-        "brutal-sm": "var(--shadow-brutal-sm)",
-        "brutal-lg": "var(--shadow-brutal-lg)",
+        elegant: "var(--shadow-elegant)",
+        "elegant-sm": "var(--shadow-elegant-sm)",
+        "elegant-lg": "var(--shadow-elegant-lg)",
+        glow: "var(--shadow-glow)",
       },
       keyframes: {
         "accordion-down": {
@@ -84,23 +86,37 @@ export default {
           "100%": { transform: "translateX(-50%)" },
         },
         "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "scale-in": {
-          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "0%": { transform: "scale(0.98)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        marquee: "marquee 25s linear infinite",
-        "fade-in": "fade-in 0.3s ease-out forwards",
-        "scale-in": "scale-in 0.2s ease-out forwards",
+        marquee: "marquee 30s linear infinite",
+        "fade-in": "fade-in 0.5s ease-out forwards",
+        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "scale-in": "scale-in 0.3s ease-out forwards",
+        shimmer: "shimmer 2s linear infinite",
       },
       letterSpacing: {
-        brutal: "0.2em",
+        luxury: "0.15em",
+        wide: "0.05em",
+      },
+      transitionTimingFunction: {
+        luxury: "cubic-bezier(0.25, 0.1, 0.25, 1)",
       },
     },
   },
